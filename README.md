@@ -9,7 +9,7 @@ The directory also contains matlab scripts used to run SBIEM in the context of t
 
 
 # requirements.
-
+numpy,matplotlib,sys,os,glob,scipy
 
 # List of scripts
 
