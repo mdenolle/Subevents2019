@@ -4,7 +4,6 @@ close all
 
 Index_test=0;
 plot_movie=0;
-CorrL1=[10 5 2];
 Dc_list=[0.4 0.8 1.2];
 
 
@@ -24,15 +23,14 @@ for i_Dc=1:length(Dc_list)
         close all
         
         
-        for iCorrL=10%CorrL1
+        for iCorrL=10%CorrL1 For the power law distribution, this term doesn't matter.
             for iHurst=0.8 %0 corresponds to pre-setted stress (non-random)
                 
                 tic
                 %pause(3)
                 
                 %close all
-                clc
-                %CorrL=40;              
+                clc           
                 output_dir=['/Users/Yin9xun/Work/Two_Asperities_scaling/Dc_finer_' num2str(Dc_list(i_Dc))];
                 mkdir(output_dir)
                 
