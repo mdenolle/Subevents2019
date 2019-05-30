@@ -96,7 +96,7 @@ for i,filename in enumerate(quakelist): # loop through each quake
     for el in I :                       # go through time
         if rate[el-1]<rate[el] and rate[el]>rate[el+1] and rate[el]>(0.1*max(rate0)) and time[el]>0  : # peak detection / default = 0.10 for the min. value of peak
             error0=1e99  # initial error for the grid fit
-            std0=0.;gauss=0
+            std0=0.
             for std in np.linspace(0.01/2.335,300/2.335,700) : # grid fit
                 gauss=gaussienne(rate[el],time[el],std,time)
                 gauss=gauss*rate[el]/max(gauss) 
@@ -116,7 +116,7 @@ for i,filename in enumerate(quakelist): # loop through each quake
                     Tsub[i,sub-1]=time[el] # store time at which it occurs
                     Dsub[i,sub-1]=std0*2*np.sqrt(2*np.log(10)) # duration of subevent
      
-    MM0[i]=(np.trapz(gauss_final,x=time)*M0[-1] )    # recover reconstructed moment 
+    MM0[i]=(np.trapz(gauss_final,x=time)*M0[i] )    # recover reconstructed moment 
     Nsub[i]=(sub)                           # store number of subevents for that quake
     err[i]=(MM0[i]/M0[i])                  # store error between reconstructed and true moment.
     Mw[i]=(2/3*np.log10(M0[i])-6.07)        # store moment magnitude
