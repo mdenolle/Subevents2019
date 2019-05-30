@@ -60,69 +60,69 @@ err = np.zeros(len(quakelist))
 Mw = np.zeros(len(quakelist))
 Nsub = np.zeros(len(quakelist),dtype=np.int)
 
-# for i,filename in enumerate(quakelist): # loop through each quake
+for i,filename in enumerate(quakelist): # loop through each quake
 
-#     # read SCARDEC files
-#     piplot=np.loadtxt(filename,skiprows=2)
-#     opened=open(filename)
-#     opened.readline()
-#     list=opened.readline().split(' ')   # read lines of parameters
-#     mo1[i]=(float(list[1]))          # extract moment
-#     depth[i]=(float(list[0]))        # extract depth
-#     dip[i]=(float(list[4]))          # extract dip
-#     r1=float(list[5]);r2=float(list[8]) # extract rake
-#      # use Shearer et al, 2006 to parameterize the focal mechanism type.
-#     if abs(r1)>90:r1=(180-abs(r1))*(r1/abs(r1))
-#     if abs(r2)>90:r2=(180-abs(r2))*(r2/abs(r2))
-#     if abs(r1)<abs(r2):
-#         FM[i]=r1/90
-#     else:
-#         FM[i]=r2/90
+    # read SCARDEC files
+    piplot=np.loadtxt(filename,skiprows=2)
+    opened=open(filename)
+    opened.readline()
+    list=opened.readline().split(' ')   # read lines of parameters
+    mo1[i]=(float(list[1]))          # extract moment
+    depth[i]=(float(list[0]))        # extract depth
+    dip[i]=(float(list[4]))          # extract dip
+    r1=float(list[5]);r2=float(list[8]) # extract rake
+     # use Shearer et al, 2006 to parameterize the focal mechanism type.
+    if abs(r1)>90:r1=(180-abs(r1))*(r1/abs(r1))
+    if abs(r2)>90:r2=(180-abs(r2))*(r2/abs(r2))
+    if abs(r1)<abs(r2):
+        FM[i]=r1/90
+    else:
+        FM[i]=r2/90
 
-#     # read STF:
-#     time=np.zeros(len(piplot));rate=np.zeros(len(piplot))            # initialize time and moment-rate vectors
-#     for ii in range(len(piplot)) : # read each time stamp
-#         time[ii]=(piplot[ii][0])
-#         rate[ii]=(piplot[ii][1]) 
-#     # find index of positive time and reliable amplitudes.
-#     I=np.where( (rate>=0.001*np.max(rate)) & (time>=0)) [0]
-#     Td[i]=(time[I[-1]])           # duration of quake
-#     M0[i]=(np.trapz(rate[I],x=time[I])) # moment calculated from integrating the STF
-#     rate=rate/M0[i]     # We normalize the STF
-#     rate0=rate # STF that will not undergo the Gaussian substractions
+    # read STF:
+    time=np.zeros(len(piplot));rate=np.zeros(len(piplot))            # initialize time and moment-rate vectors
+    for ii in range(len(piplot)) : # read each time stamp
+        time[ii]=(piplot[ii][0])
+        rate[ii]=(piplot[ii][1]) 
+    # find index of positive time and reliable amplitudes.
+    I=np.where( (rate>=0.001*np.max(rate)) & (time>=0)) [0]
+    Td[i]=(time[I[-1]])           # duration of quake
+    M0[i]=(np.trapz(rate[I],x=time[I])) # moment calculated from integrating the STF
+    rate=rate/M0[i]     # We normalize the STF
+    rate0=rate # STF that will not undergo the Gaussian substractions
 
-#     sub=0  # initially, no peak detected => 0 peaks
-#     gauss_final=np.zeros(len(rate)) # Final  Gaussian-built STF, of the same size as 'rate'
-#     for el in I :                       # go through time
-#         if rate[el-1]<rate[el] and rate[el]>rate[el+1] and rate[el]>(0.1*max(rate0)) and time[el]>0  : # peak detection / default = 0.10 for the min. value of peak
-#             error0=1e99  # initial error for the grid fit
-#             std0=0.;gauss=0
-#             for std in np.linspace(0.01/2.335,300/2.335,700) : # grid fit
-#                 gauss=gaussienne(rate[el],time[el],std,time)
-#                 gauss=gauss*rate[el]/max(gauss) 
-#                 error=np.sum((rate[el-5:el+5]-gauss[el-5:el+5])**2)
-#                 if error<error0 :
-#                     std0=std
-#                     error0=error
-#                     gauss0=gauss
-# #                 # Computation of the event's magnitude given the subevent's magnitude
-#         # if duration is greater than 1s and shorter than entire source duration
-#             if std0>1/4 and 4*std0< 1.2*Td[i]:
-#                     gauss_final=gauss_final+gauss0 # sum up the subevent gaussian
-#                     rate=rate-gauss0    # make residual
-#                     sub+=1              # increment subevent
+    sub=0  # initially, no peak detected => 0 peaks
+    gauss_final=np.zeros(len(rate)) # Final  Gaussian-built STF, of the same size as 'rate'
+    for el in I :                       # go through time
+        if rate[el-1]<rate[el] and rate[el]>rate[el+1] and rate[el]>(0.1*max(rate0)) and time[el]>0  : # peak detection / default = 0.10 for the min. value of peak
+            error0=1e99  # initial error for the grid fit
+            std0=0.;gauss=0
+            for std in np.linspace(0.01/2.335,300/2.335,700) : # grid fit
+                gauss=gaussienne(rate[el],time[el],std,time)
+                gauss=gauss*rate[el]/max(gauss) 
+                error=np.sum((rate[el-5:el+5]-gauss[el-5:el+5])**2)
+                if error<error0 :
+                    std0=std
+                    error0=error
+                    gauss0=gauss
+#                 # Computation of the event's magnitude given the subevent's magnitude
+        # if duration is greater than 1s and shorter than entire source duration
+            if std0>1/4 and 4*std0< 1.2*Td[i]:
+                    gauss_final=gauss_final+gauss0 # sum up the subevent gaussian
+                    rate=rate-gauss0    # make residual
+                    sub+=1              # increment subevent
 
-#                     Ms[i,sub-1]=np.trapz(gauss0,x=time)*M0[i]  # store moment of each subevent
-#                     Tsub[i,sub-1]=time[el] # store time at which it occurs
-#                     Dsub[i,sub-1]=std0*2*np.sqrt(2*np.log(10)) # duration of subevent
+                    Ms[i,sub-1]=np.trapz(gauss0,x=time)*M0[i]  # store moment of each subevent
+                    Tsub[i,sub-1]=time[el] # store time at which it occurs
+                    Dsub[i,sub-1]=std0*2*np.sqrt(2*np.log(10)) # duration of subevent
      
-#     MM0[i]=(np.trapz(gauss_final,x=time)*M0[-1] )    # recover reconstructed moment 
-#     Nsub[i]=(sub)                           # store number of subevents for that quake
-#     err[i]=(MM0[i]/M0[i])                  # store error between reconstructed and true moment.
-#     Mw[i]=(2/3*np.log10(M0[i])-6.07)        # store moment magnitude
+    MM0[i]=(np.trapz(gauss_final,x=time)*M0[-1] )    # recover reconstructed moment 
+    Nsub[i]=(sub)                           # store number of subevents for that quake
+    err[i]=(MM0[i]/M0[i])                  # store error between reconstructed and true moment.
+    Mw[i]=(2/3*np.log10(M0[i])-6.07)        # store moment magnitude
 
-# # store in variable. 
-# np.savez('allvar',M0=M0,Ms=Ms,MM0=MM0,Nsub=Nsub,Tsub=Tsub,Dsub=Dsub,Td=Td,FM=FM,depth=depth,err=err,Mw=Mw)
+# store in variable. 
+np.savez('allvar',M0=M0,Ms=Ms,MM0=MM0,Nsub=Nsub,Tsub=Tsub,Dsub=Dsub,Td=Td,FM=FM,depth=depth,err=err,Mw=Mw)
 
 
 # the following section plots figures in the main paper. you can stop here.
