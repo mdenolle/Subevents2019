@@ -1,4 +1,4 @@
-To reproduce the simulation results of Danre et al. (2019), simply run the matlab script: run_simulations.m
+To reproduce the simulation results of Danre et al. (2019), simply change the output_dir in script run_simulations.m and run the matlab script: 
 Random seeds need to be modified for specific groups of simulations (see comments in run_simulations.m)
 
 by Jiuxun Yin 05/30/2019
