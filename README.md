@@ -24,10 +24,10 @@ SIM_STF/ * .dat     :  all simulated STFs sampled at dt=0.0730s
 
 
 # list of variables
-allvar.npz:   results out of main
-allvar_triangle.npz:  results out of test_triangle.py
-allvar_usgs.npz:    results out of test_usgs.py
-allvar_sim.npz:     results out of test_simulations.py
+allvar.npz:   results out of main \\
+allvar_triangle.npz:  results out of test_triangle.py \\
+allvar_usgs.npz:    results out of test_usgs.py \\
+allvar_sim.npz:     results out of test_simulations.py\\
 
 
 
