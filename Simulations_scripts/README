@@ -1,3 +1,9 @@
+To reproduce the simulation results of Danre et al. (2019), simply run the matlab script: run_simulations.m
+Random seeds need to be modified for specific groups of simulations (see comments in run_simulations.m)
+The following are the the README file of SBIEMLAB from Jean-Paul Ampuero
+
+
+
 ==================================================
 =                                                =
 =                    SBIEMLAB                    = 
@@ -130,8 +136,8 @@ ampuero@erdw.ethz.ch
 ETH Zurich (Swiss Federal Institute of Technology)
 Institute of Geophysics
 Seismology and Geodynamics Group
-ETH Hönggerberg HPP O 13.1
-CH-8093 Zürich
+ETH HÃ¶nggerberg HPP O 13.1
+CH-8093 ZÃ¼rich
 Switzerland
 
 +41 44 633 2197 (office)
