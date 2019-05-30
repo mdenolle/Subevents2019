@@ -1,5 +1,3 @@
-cd /Users/Yin9xun/Dropbox/Rupture_dynamic_codes/SBIEMLAB
-
 clear
 close all
 
