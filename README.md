@@ -14,20 +14,29 @@ numpy,matplotlib,sys,os,glob,scipy
 # List of scripts
 
 subevent_scardec.py: main script for Danre et al, 2019. Includes plotting for the figures in the paper.
+
 test_triangle.py:       copy of main script but with triangle kernels
+
 test_usgs.py:           same as in main but for USGS database.
+
 test_simulations.py     same as in main for for simulated STFs.
+
 
 # list of STF files:
 USGS_STF/ * . newstf:  all USGS STFs sampled at dt=0.0730s, 180 of them (1990-2017)
+
 SIM_STF/ * .dat     :  all simulated STFs sampled at dt=0.0730s
 
 
 # list of variables
-allvar.npz:   results out of main \\
-allvar_triangle.npz:  results out of test_triangle.py \\
-allvar_usgs.npz:    results out of test_usgs.py \\
-allvar_sim.npz:     results out of test_simulations.py\\
+allvar.npz:   results out of main 
+
+allvar_triangle.npz:  results out of test_triangle.py 
+
+allvar_usgs.npz:    results out of test_usgs.py 
+
+allvar_sim.npz:     results out of test_simulations.py
+
 
 
 
