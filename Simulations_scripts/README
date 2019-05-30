@@ -1,9 +1,10 @@
 To reproduce the simulation results of Danre et al. (2019), simply run the matlab script: run_simulations.m
 Random seeds need to be modified for specific groups of simulations (see comments in run_simulations.m)
+
+by Jiuxun Yin 05/30/2019
+
+
 The following are the the README file of SBIEMLAB from Jean-Paul Ampuero
-
-
-
 ==================================================
 =                                                =
 =                    SBIEMLAB                    = 
