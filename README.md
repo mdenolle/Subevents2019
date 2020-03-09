@@ -2,7 +2,7 @@
 
 
 Scripts that were used in the following publication:
-Danre, Yin, Lipovsky, Denolle "Earthquakes within earthquakes: Patterns in rupture complexity" (in revision in GRL 2019).
+Danré P, Yin J, Lipovsky BP, Denolle MA. Earthquakes within earthquakes: Patterns in rupture complexity. Geophysical Research Letters. 2019 Jul 16;46(13):7352-60.
 
 This directory contains python scripts to perform a subevent decomposition of source time functions using Gaussian kernels. It contains resampled USGS data set of 180 STFs (as published in Hayes 2017), 500 STFs simulated using SBIEM from Pablo Ampuero.
 The directory also contains matlab scripts used to run SBIEM in the context of the publication.
